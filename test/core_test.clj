@@ -29,13 +29,13 @@
             :end "2018-02-26T18:00:00.000Z"})
 
 (deftest not-before
-  (is (= false (db/str-before date2 date1))))
+  (is (= false (db/str-before? date2 date1))))
 
 (deftest before
-  (is (= true (db/str-before date1 date2))))
+  (is (= true (db/str-before? date1 date2))))
 
 (deftest equal-does-not-resolve-as-before
-  (is (= false (db/str-before date1 date1))))
+  (is (= false (db/str-before? date1 date1))))
 
 (deftest one-event-is-empty
   (is (= #{} (db/get-overlapping-events [lunch]))))
