@@ -25,8 +25,7 @@
   [da db]
   (let [d1 (->date da)
         d2 (->date db)]
-    (or (t/before? d1 d2)
-        #_(t/equal? d1 d2))))
+    (t/before? d1 d2)))
 
 (defn recur-compare
   "Recursively compares a list of events sorted by start time
