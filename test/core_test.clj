@@ -21,6 +21,11 @@
 (def date1 "2018-02-26T08:00:00.000Z")
 (def date2 "2018-02-26T12:00:00.000Z")
 
+
+;; The goal here is to demonstrate that if one event
+;; ends when another begins, they should not overlap
+;; Thus the change in the test from 'before-or-equal'
+;; to simply 'before'
 (def seq-a {:name "interview"
             :start "2018-02-26T14:00:00.000Z"
             :end "2018-02-26T15:00:00.000Z"})    
@@ -61,11 +66,11 @@
          #{})))        
     
 (deftest many-overlap
-  (is (= (db/get-overlapping-events [lab 
-                                     lunch 
+  (is (= (db/get-overlapping-events [lunch 
                                      basketball 
                                      interview 
-                                     practice])
+                                     practice
+                                     lab])
         #{#{lab lunch} 
           #{lab basketball} 
           #{lab interview} 

@@ -27,7 +27,7 @@
 
 (defn str-before?
   "Accepts two string representations as dates.
-   Returns boolean of da 'before or equal' db"
+   Returns boolean of da 'before' db"
   [da db]
   (let [d1 (->date da)
         d2 (->date db)]
