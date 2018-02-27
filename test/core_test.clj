@@ -48,15 +48,17 @@
 
 (deftest simple-overlap
   (is (= (db/get-overlapping-events [lab lunch basketball]) 
-          #{#{lab lunch} #{lab basketball} #{basketball lunch}})))
+          #{#{lab lunch} 
+            #{lab basketball} 
+            #{basketball lunch}})))
 
 (deftest many-overlapa
   (is (= (db/get-overlapping-events [practice interview])
-        #{#{interview practice}})))
+         #{#{interview practice}})))
         
 (deftest should-equal-overlap
   (is (= (db/get-overlapping-events [seq-a seq-b])
-        #{})))        
+         #{})))        
     
 (deftest many-overlap
   (is (= (db/get-overlapping-events [lab 
