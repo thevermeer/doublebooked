@@ -2,10 +2,6 @@
   (:require [clojure.test :refer [deftest is]]
 			[doublebooked.core :as db]))
 
-(ns core-test
-  (:require [clojure.test :refer [deftest is]]
-			[doublebooked.core :as db]))
-
 (def lab {:name "lab"
           :start "2018-02-26T08:00:00.000Z"
           :end "2018-02-26T16:00:00.000Z"})
