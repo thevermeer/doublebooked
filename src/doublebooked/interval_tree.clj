@@ -78,7 +78,7 @@
   "Accepts a nested map of maps representing a centered interval tree
    and an event as a reference
    Returns a collection of sets of overlapping events"
-  [tree {start :start :as ev}]
+  [{:keys [overlapping date before after]} {start :start :as ev}]
   (concat
       ;; overlapping
       (keep
@@ -87,17 +87,17 @@
                      (< (compare start (:end e)) 0)
                      (not= e ev))
             #{e ev}))
-        (:overlapping tree))
+        overlapping)
 
       ;;before
-      (when (and (neg? (compare start (:date tree)))
-                 (seq (:before tree)))
-        (overlapping-events (:before tree) start))
+      (when (and (neg? (compare start date))
+                 (seq before))
+        (overlapping-events before start))
 
       ;; after
-      (when (and (pos? (compare start (:date tree)))
-                 (seq (:after tree)))
-        (overlapping-events (:after tree) start))))
+      (when (and (pos? (compare start date))
+                 (seq after))
+        (overlapping-events after start))))
 
 ;; -------------------------------------------------
 ;; ---- Solution Function ----
