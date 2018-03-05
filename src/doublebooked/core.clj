@@ -44,15 +44,17 @@
    Returns a list of sets, with each set containing the pair of 
    overlapping events"
   [{e1e :end :as ev} coll]
-  ;; Filter + Transform the overlaps into #{a b}
-  (let [res (keep
-              (fn [{e2s :start :as ev2}]
-                (when (str-before? e2s e1e)
-                  #{ev ev2}))
-              coll)
+  ;; Transform the overlaps into #{a b}
+  ;; Leverages take-while to reduce iterations under O(n^2) runtime
+  (let [res (->> coll
+                 (take-while 
+                  (fn [{e2s :start :as ev2}] 
+                    (str-before? e2s e1e)))
+                 (mapv 
+                   (fn [ev2] #{ev ev2})))
         rem  (rest coll)]
 
-    (concat (vec res)
+    (concat res
             (when (seq rem)
               ;; recursive step
               (recur-compare (first coll) rem)))))
